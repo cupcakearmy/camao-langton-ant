@@ -45,7 +45,7 @@ Working:  2h 45min
 **CLI**
 
 ```sh
-make cli
+make -B cli
 ```
 
 **Web Version**
@@ -55,3 +55,9 @@ make -B web
 ```
 
 Go to [localhost:8000](http://localhost:8000)
+
+**Docker**
+
+```sh
+make -B docker
+```
