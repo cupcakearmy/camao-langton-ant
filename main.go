@@ -104,23 +104,21 @@ func negMod(x, mod int) int {
 }
 
 func nextState(world *World) {
-	fmt.Println(world.ant.x, world.ant.y, world.ant.direction)
 	isOnWhite := world.field[world.ant.y][world.ant.x]
 
 	// Turn left/right
-	fmt.Printf("Ant %d\n", world.ant.direction)
 	if isOnWhite {
 		world.ant.direction += 1
 	} else {
 		world.ant.direction -= 1
 	}
+	// Wrap
 	world.ant.direction = Direction(negMod(int(world.ant.direction), 4))
 
 	// Flip
 	world.field[world.ant.y][world.ant.x] = !isOnWhite
 
 	// Move
-	fmt.Printf("Ant %d\n", world.ant.direction)
 	if world.ant.direction == Top {
 		world.ant.y -= 1
 	} else if world.ant.direction == Right {
@@ -130,17 +128,14 @@ func nextState(world *World) {
 	} else if world.ant.direction == Left {
 		world.ant.x -= 1
 	}
-
 	// Wrap
 	world.ant.x = negMod(world.ant.x, len(world.field))
 	world.ant.y = negMod(world.ant.y, len(world.field[0]))
-
-	fmt.Println(world.ant.x, world.ant.y, world.ant.direction)
 }
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	world := randomWorld(5)
+	world := randomWorld(10)
 	it := 0
 	for {
 		fmt.Printf("Iteration: %d\n", it)
