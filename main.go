@@ -38,17 +38,17 @@ var (
 
 func visualizeWorld(world *World) string {
 	output := ""
-	for i := 0; i < len(world.field); i++ {
-		for j := 0; j < len(world.field[i]); j++ {
+	for y := 0; y < len(world.field); y++ {
+		for x := 0; x < len(world.field[y]); x++ {
 			var c *color.Color
-			if world.field[i][j] {
+			if world.field[y][x] {
 				c = White
 			} else {
 				c = Black
 			}
 
 			s := "  "
-			if i == world.ant.x && j == world.ant.y {
+			if x == world.ant.x && y == world.ant.y {
 				if world.ant.direction == Top {
 					s = "️↑ "
 				} else if world.ant.direction == Right {
@@ -71,10 +71,10 @@ func visualizeWorld(world *World) string {
 
 func randomField(size int) Field {
 	var field Field = make([][]bool, size)
-	for i := 0; i < size; i++ {
-		field[i] = make([]bool, size)
-		for j := 0; j < size; j++ {
-			field[i][j] = rand.Intn(2) == 1
+	for y := 0; y < size; y++ {
+		field[y] = make([]bool, size)
+		for x := 0; x < size; x++ {
+			field[y][x] = rand.Intn(2) == 1
 		}
 	}
 	return field
@@ -105,7 +105,7 @@ func negMod(x, mod int) int {
 
 func nextState(world *World) {
 	fmt.Println(world.ant.x, world.ant.y, world.ant.direction)
-	isOnWhite := world.field[world.ant.x][world.ant.y]
+	isOnWhite := world.field[world.ant.y][world.ant.x]
 
 	// Turn left/right
 	fmt.Printf("Ant %d\n", world.ant.direction)
@@ -117,7 +117,7 @@ func nextState(world *World) {
 	world.ant.direction = Direction(negMod(int(world.ant.direction), 4))
 
 	// Flip
-	world.field[world.ant.x][world.ant.y] = !isOnWhite
+	world.field[world.ant.y][world.ant.x] = !isOnWhite
 
 	// Move
 	fmt.Printf("Ant %d\n", world.ant.direction)
