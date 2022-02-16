@@ -18,16 +18,28 @@
 
 <script lang="ts">
   export let world: TWorld
+
+  const mapping = {
+    0: '↑',
+    1: '→',
+    2: '↓',
+    3: '←',
+  }
+
+  function getContentForCell(world: World, x: number, y: number): string {
+    if (world.ant.x === x && world.ant.y === y) {
+      return mapping[world.ant.direction]
+    }
+    return ''
+  }
 </script>
 
-{#each world.field as row}
+{#each world.field as row, y}
   <div class="row">
-    {#each row as cell}
-      {#if cell}
-        <div class="cell white" />
-      {:else}
-        <div class="cell" />
-      {/if}
+    {#each row as cell, x}
+      <div class="cell" class:white={cell}>
+        {getContentForCell(world, x, y)}
+      </div>
     {/each}
   </div>
 {/each}
@@ -39,7 +51,10 @@
     display: flex;
   }
   .cell {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
     margin: 0.05rem;
     width: 2rem;
     aspect-ratio: 1/1;

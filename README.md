@@ -9,3 +9,7 @@ Start: created repo, read pdf & start coding.
 **12.20**
 
 Working CLI
+
+**13.25**
+
+Server & Frontend
