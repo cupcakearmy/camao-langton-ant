@@ -1,5 +1,11 @@
 # Langton Ant
 
+## Result
+
+- CLI Example
+- Server with frontend
+- Dockerfile
+
 ## Timeline
 
 **~11.00**
@@ -21,6 +27,18 @@ Server & Frontend
 **14.00**
 
 Makefile & readme
+
+**14.10**
+
+Multi stage docker file
+
+### Summary
+
+```
+Pause:    25min
+Total:    3h 10min
+Working:  2h 45min
+```
 
 ## Running
 
