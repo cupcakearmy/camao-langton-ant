@@ -1,17 +1,10 @@
 <script lang="ts" context="module">
-  export enum TDirection {
-    Up = 0,
-    Right = 1,
-    Down = 2,
-    Left = 3,
-  }
-
   export type TWorld = {
     field: boolean[][]
     ant: {
       x: number
       y: number
-      direction: TDirection
+      direction: number
     }
   }
 </script>
@@ -26,7 +19,7 @@
     3: '←',
   }
 
-  function getContentForCell(world: World, x: number, y: number): string {
+  function getContentForCell(world: TWorld, x: number, y: number): string {
     if (world.ant.x === x && world.ant.y === y) {
       return mapping[world.ant.direction]
     }

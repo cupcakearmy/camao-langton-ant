@@ -52,5 +52,8 @@ func Init() {
 		json.NewEncoder(w).Encode(world)
 	})
 
+	fs := http.FileServer(http.Dir("./web/build"))
+	http.Handle("/", fs)
+
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
